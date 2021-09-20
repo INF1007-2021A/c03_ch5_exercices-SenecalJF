@@ -6,29 +6,83 @@ from typing import List
 
 
 def convert_to_absolute(number: float) -> float:
-    return 0
+    if number < 0 :
+        number *= -1
+    return number
 
 
 def use_prefixes() -> List[str]:
     prefixes, suffixe = 'JKLMNOPQ', 'ack'
+    lst_nom_complet = []
+    for character in range(len(prefixes)):
+        lst_nom_complet.append(prefixes[character] + suffixe)
+    return lst_nom_complet
 
-    return [""]
+    """
+    for character in prefixes:
+        lst_nom_complet.append(character + suffixe)
+    """
 
 
 def prime_integer_summation() -> int:
-    return 0
+    sum_prime_integer = 0
+    i = 0
+    nombre_premier = 1
+   
+    while (i<100):
+        est_pas_nb_premier = False
+        
+        for j in range(2, (int(nombre_premier/2+1))):
+            
+            if nombre_premier % j == 0 and not est_pas_nb_premier:
+                est_pas_nb_premier = True
+            
+        if not est_pas_nb_premier:
+            sum_prime_integer += nombre_premier
+            i += 1
+        nombre_premier += 1
+        
+    return sum_prime_integer
 
 
 def factorial(number: int) -> int:
-    return 0
+    
+    produit = 1
+    while(number > 0):
+        produit *= (number)
+        number += -1
+        
+    return produit
 
 
 def use_continue() -> None:
-    pass
+    for i in range(1, 11):
+        if i == 5:
+            continue
+        print(i)
 
 
 def verify_ages(groups: List[List[int]]) -> List[bool]:
-    return []
+    
+    list_verify = []
+    for groupe in groups:
+        est_valide = True
+        if len(groupe) > 10 or len(groupe) <= 3:
+                est_valide = False
+        for age_personne in groupe:
+            age_personne = int(age_personne)
+            if age_personne == 25 :
+                est_valide = True
+            else:
+                if age_personne < 18 :
+                    est_valide = False
+                if age_personne > 70 :
+                    for i in groupe:
+                        if i == 50:
+                            est_valide = False
+        list_verify.append(est_valide)
+
+    return list_verify
 
 
 def main() -> None:
