@@ -3,7 +3,7 @@
 
 
 from typing import List
-
+import time as tm
 
 def convert_to_absolute(number: float) -> float:
     if number < 0 :
@@ -27,21 +27,23 @@ def use_prefixes() -> List[str]:
 def prime_integer_summation() -> int:
     sum_prime_integer = 0
     i = 0
-    nombre_premier = 1
-   
+    nombre_premier = 2
+    timer_start = tm.perf_counter()
     while (i<100):
-        est_pas_nb_premier = False
+        est_nb_premier = True
         
-        for j in range(2, (int(nombre_premier/2+1))):
+        for j in range(2, (int(nombre_premier/2)+1)):
+         
+            if nombre_premier % j == 0 and est_nb_premier:
+                est_nb_premier = False
             
-            if nombre_premier % j == 0 and not est_pas_nb_premier:
-                est_pas_nb_premier = True
-            
-        if not est_pas_nb_premier:
+        if est_nb_premier:
             sum_prime_integer += nombre_premier
             i += 1
         nombre_premier += 1
-        
+    timer_end = tm.perf_counter()
+    print(f"run time for prime_integer_summation : {timer_end - timer_start :0.4f} secondes ")
+    
     return sum_prime_integer
 
 
@@ -69,17 +71,20 @@ def verify_ages(groups: List[List[int]]) -> List[bool]:
         est_valide = True
         if len(groupe) > 10 or len(groupe) <= 3:
                 est_valide = False
-        for age_personne in groupe:
-            age_personne = int(age_personne)
-            if age_personne == 25 :
-                est_valide = True
-            else:
-                if age_personne < 18 :
-                    est_valide = False
-                if age_personne > 70 :
-                    for i in groupe:
-                        if i == 50:
-                            est_valide = False
+        else:
+            for age_personne in groupe:
+                
+                if age_personne == 25 :
+                    est_valide = True
+                    break       
+                else:
+                    if age_personne < 18 :
+                        est_valide = False
+                    if age_personne > 70 :
+                        for i in groupe:
+                            if i == 50:
+                                est_valide = False
+           
         list_verify.append(est_valide)
 
     return list_verify
